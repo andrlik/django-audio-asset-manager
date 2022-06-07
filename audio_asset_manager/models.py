@@ -43,7 +43,7 @@ class LicenseType(TimeStampedModel):
         help_text=_("Do we need to include this license term in the credits?"),
     )
 
-    def __str__(self):
+    def __str__(self):  # pragma: nocover
         return self.name
 
     class Meta:

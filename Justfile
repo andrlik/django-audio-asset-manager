@@ -52,7 +52,7 @@ check-codestyle:
 
 # Runs mypy type-checking.
 mypy:
-  poetry run mypy --config-file pyproject.toml ./
+  poetry run mypy --install-types --non-interactive --config-file pyproject.toml ./
 
 # Runs test suite.
 test:
