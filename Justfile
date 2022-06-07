@@ -26,6 +26,10 @@ setup: _install _pre-commit-install
 console:
   poetry run python manage.py shell_plus
 
+# Open a DB shell
+db:
+  poetry run python manage.py dbshell
+
 # Start up development server.
 server:
   poetry run python manage.py runserver

@@ -65,6 +65,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "rules.apps.AutodiscoverRulesConfig",
+    "django_extensions",
 ]
 
 LOCAL_APPS = [
