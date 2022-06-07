@@ -190,6 +190,8 @@ cython_debug/
 # *.iml
 # *.ipr
 
+audio_asset_manager.db
+
 # CMake
 cmake-build-*/
 
