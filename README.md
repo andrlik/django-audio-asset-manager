@@ -25,7 +25,7 @@ A Django app for managing a database of assets used in audio production.
 
 * Free software: BSD
 * Repository and Issue Tracker: https://github.com/andrlik/django-audio-asset-manager/
-* Documentation: https://django-audio-asset-manager.readthedocs.io.
+* Documentation: https://andrlik.github.io/django-audio-asset-manager/.
 
 
 ## Features
