@@ -7,7 +7,6 @@
 [![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
 [![Semantic versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/andrlik/django-audio-asset-manager/releases)
 [![Build status badge](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/build.yml)
-[![Codestyle test status](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml)
 [![Code coverage badge](https://coveralls.io/repos/github/andrlik/django-audio-asset-manager/badge.svg?branch=main)](https://coveralls.io/github/andrlik/django-audio-asset-manager?branch=main)
 [![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://andrlik.github.io/django-audio-asset-manager/)
 

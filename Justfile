@@ -58,6 +58,11 @@ mypy:
 test:
   poetry run pytest -c pyproject.toml
 
+# Runs test suite in format suitable for ci.
+_citest:
+  poetry run pytest --cov-report=
+  poetry run coverage lcov
+
 # Runs poetry safety checks and bandit checks.
 check-safety:
   poetry check
@@ -66,6 +71,9 @@ check-safety:
 
 # Runs test suite, check-codestyle, mypy, and safety checks.
 lint: test check-codestyle mypy check-safety
+
+# Do tests and linting for ci environment.
+cibuild: _citest check-codestyle mypy check-safety
 
 # Removes pycache directories and files.
 _pycache-remove:

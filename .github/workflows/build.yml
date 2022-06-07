@@ -11,11 +11,11 @@ env:
 on:
   pull_request:
     branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    paths-ignore: [ "docs/**", "README.md"]
 
   push:
     branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    paths-ignore: [ "docs/**", "README.md" ]
 
 
 jobs:
@@ -47,15 +47,12 @@ jobs:
     - name: Install dependencies
       run: |
         poetry config virtualenvs.in-project true
-        poetry install
-    - name: Test with pytest
+        just _install
+    - name: Test with pytest and do linting, typing, and safety checks.
       run: |
-
         sqlite3 tests/audio_asset_manager.db '.databases'
         poetry run python manage.py collectstatic --noinput
-        poetry run pytest --cov-report=
-        poetry run coverage lcov
-
+        just cibuild
 
     - name: Submit coverage data to coveralls.io
       uses: coverallsapp/github-action@master
