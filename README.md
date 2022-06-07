@@ -12,7 +12,7 @@
 
 [![Semantic versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/andrlik/django-audio-asset-manager/releases)
 
-[![Build status badge](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/build.yml)
+[![Build status badge](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/build.yml)
 
 [![Codestyle test status](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml)
 
