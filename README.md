@@ -1,7 +1,4 @@
-==========================
-Django Audio Asset Manager
-==========================
-
+# Django Audio Asset Manager
 
 [![PyPI version](https://img.shields.io/pypi/v/django-audio-asset-manager.svg)](https://pypi.python.org/pypi/django-audio-asset-manager)
 
@@ -19,12 +16,7 @@ Django Audio Asset Manager
 
 [![Codestyle test status](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml/badge.svg?branch=main)](https://github.com/andrlik/django-audio-asset-manager/actions/workflows/codestyle.yml)
 
-
-
 [![Code coverage badge](https://coveralls.io/repos/github/andrlik/django-audio-asset-manager/badge.svg?branch=main)](https://coveralls.io/github/andrlik/django-audio-asset-manager?branch=main)
-
-
-
 
 [![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://andrlik.github.io/django-audio-asset-manager/)
 
