@@ -66,6 +66,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "rules.apps.AutodiscoverRulesConfig",
     "django_extensions",
+    "taggit",
 ]
 
 LOCAL_APPS = [
