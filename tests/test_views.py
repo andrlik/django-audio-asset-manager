@@ -46,3 +46,39 @@ def test_other_user_does_not_see_records(
         response = client.get(url)
     assert response.status_code == 200
     assert len(response.context["object_list"]) == 0
+
+
+def test_detail_views_require_login(
+    client, django_assert_max_num_queries, user_created_assets
+):
+    test_asset = user_created_assets[0]
+    test_artist = test_asset.artist
+    test_collection = test_asset.collection
+    test_source = test_asset.source
+    with django_assert_max_num_queries(50):
+        response = client.get(
+            reverse("audio_asset_manager:asset-detail", kwargs={"pk": test_asset.id})
+        )
+    assert response.status_code == 302
+    assert "/accounts/login/" in response["Location"]
+    with django_assert_max_num_queries(50):
+        response = client.get(
+            reverse("audio_asset_manager:artist-detail", kwargs={"pk": test_artist.id})
+        )
+    assert response.status_code == 302
+    assert "/accounts/login/" in response["Location"]
+    with django_assert_max_num_queries(50):
+        response = client.get(
+            reverse(
+                "audio_asset_manager:collection-detail",
+                kwargs={"pk": test_collection.id},
+            )
+        )
+    assert response.status_code == 302
+    assert "/accounts/login/" in response["Location"]
+    with django_assert_max_num_queries(50):
+        response = client.get(
+            reverse("audio_asset_manager:source-detail", kwargs={"pk": test_source.id})
+        )
+    assert response.status_code == 302
+    assert "/accounts/login/" in response["Location"]
