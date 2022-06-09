@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views import generic
 from rules.contrib.views import AutoPermissionRequiredMixin
 
+from .forms import AudioAssetForm, CollectionForm
 from .models import Artist, AssetSource, AudioAsset, Collection
 
 
@@ -22,6 +23,8 @@ class AssetSourceListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "sources"
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            raise KeyError("A user needs to be logged in to access this page!")
         return self.model.objects.filter(owner=self.request.user)
 
 
@@ -98,6 +101,8 @@ class ArtistListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "artists"
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            raise KeyError("A user needs to be logged in to access this page!")
         return self.model.objects.filter(owner=self.request.user)
 
 
@@ -180,8 +185,13 @@ class CollectionCreateView(LoginRequiredMixin, generic.edit.CreateView):
     Create a collection.
     """
 
-    # TODO: Custom form class required to limit selectable artists to those owned by the user.
     model = Collection
+    form_class = CollectionForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"user": self.request.user})
+        return kwargs
 
 
 class CollectionUpdateView(
@@ -193,7 +203,12 @@ class CollectionUpdateView(
 
     model = Collection
     context_object_name = "collection"
-    fields = ["title", "album_artist"]
+    form_class = CollectionForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"user": self.request.user})
+        return kwargs
 
     def form_valid(self, form):
         obj = form.save()
@@ -227,6 +242,8 @@ class AudioAssetListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "assets"
 
     def get_queryset(self):
+        if self.request.user.is_anonymous:
+            raise KeyError("A user needs to be logged in to access this page!")
         return self.model.objects.filter(owner=self.request.user)
 
 
@@ -247,24 +264,13 @@ class AudioAssetCreateView(LoginRequiredMixin, generic.edit.CreateView):
     Create a new audio asset.
     """
 
-    # TODO: custom form required to limit foreign key fields to objects
-    # by owner
-
     model = AudioAsset
-    fields = [
-        "asset_type",
-        "title",
-        "artist",
-        "collection",
-        "source",
-        "filename",
-        "credit_link",
-        "explict_credit_required",
-        "duration",
-        "bpm",
-        "loudness",
-        "tags",
-    ]
+    form_class = AudioAssetForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"user": self.request.user})
+        return kwargs
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -282,23 +288,14 @@ class AudioAssetUpdateView(
     Update an audio asset.
     """
 
-    # TODO: Custom form again.
     model = AudioAsset
-    fields = [
-        "asset_type",
-        "title",
-        "artist",
-        "collection",
-        "source",
-        "filename",
-        "credit_link",
-        "explict_credit_required",
-        "duration",
-        "bpm",
-        "loudness",
-        "tags",
-    ]
+    form_class = AudioAssetForm
     context_object_name = "asset"
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"user": self.request.user})
+        return kwargs
 
     def form_valid(self, form):
         obj = form.save()
