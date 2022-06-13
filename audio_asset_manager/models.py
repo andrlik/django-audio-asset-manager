@@ -20,13 +20,6 @@ class AbstractOwnedModel(RulesModelMixin, models.Model, metaclass=RulesModelBase
 
     class Meta:
         abstract = True
-        rules_permissions = {
-            "add": rules.is_authenticated,
-            "read": is_object_owner,
-            "change": is_object_owner,
-            "delete": is_object_owner,
-            "view": is_object_owner,
-        }
 
 
 class LicenseType(TimeStampedModel):
@@ -79,6 +72,16 @@ class AssetSource(AbstractOwnedModel, TimeStampedModel):
     def __str__(self):  # pragma: nocover
         return self.name
 
+    class Meta:
+        rules_permissions = {
+            "add": rules.is_authenticated,
+            "read": is_object_owner,
+            "view": is_object_owner,
+            "change": is_object_owner,
+            "delete": is_object_owner,
+            "view": is_object_owner,
+        }
+
 
 class Artist(AbstractOwnedModel, TimeStampedModel):
     """
@@ -89,6 +92,16 @@ class Artist(AbstractOwnedModel, TimeStampedModel):
 
     def __str__(self):  # pragma: nocover
         return self.name
+
+    class Meta:
+        rules_permissions = {
+            "add": rules.is_authenticated,
+            "read": is_object_owner,
+            "view": is_object_owner,
+            "change": is_object_owner,
+            "delete": is_object_owner,
+            "view": is_object_owner,
+        }
 
 
 class Collection(AbstractOwnedModel, TimeStampedModel):
@@ -105,6 +118,16 @@ class Collection(AbstractOwnedModel, TimeStampedModel):
 
     def __str__(self):  # pragma: nocover
         return self.title
+
+    class Meta:
+        rules_permissions = {
+            "add": rules.is_authenticated,
+            "read": is_object_owner,
+            "view": is_object_owner,
+            "change": is_object_owner,
+            "delete": is_object_owner,
+            "view": is_object_owner,
+        }
 
 
 class AudioAsset(AbstractOwnedModel, TimeStampedModel):
@@ -185,3 +208,13 @@ class AudioAsset(AbstractOwnedModel, TimeStampedModel):
 
     def __str__(self):  # pragma: nocover
         return f"{self.title} - {self.artist}"
+
+    class Meta:
+        rules_permissions = {
+            "add": rules.is_authenticated,
+            "read": is_object_owner,
+            "view": is_object_owner,
+            "change": is_object_owner,
+            "delete": is_object_owner,
+            "view": is_object_owner,
+        }

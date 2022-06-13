@@ -156,3 +156,15 @@ def test_wrong_user_not_authorized_all_collection_views(
         response = client.post(url, data={})
     assert response.status_code == 403
     assert Collection.objects.get(pk=col.id)
+
+
+@pytest.mark.parametrize("view_name", ["asset-detail", "asset-update", "asset-delete"])
+def test_authorized_user_get_asset_views(
+    client, django_assert_max_num_queries, user_created_assets, view_name
+):
+    asset = user_created_assets[0]
+    client.force_login(asset.owner)
+    url = reverse(f"audio_asset_manager:{view_name}", kwargs={"pk": asset.id})
+    with django_assert_max_num_queries(50):
+        response = client.get(url)
+    assert response.status_code == 200
