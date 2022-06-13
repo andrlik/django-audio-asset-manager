@@ -5,6 +5,8 @@ from audio_asset_manager.models import Artist, AssetSource, AudioAsset, Collecti
 
 pytestmark = pytest.mark.django_db(transaction=True)
 
+# Testing List views
+
 
 @pytest.mark.parametrize("viewname", ["source-list", "artist-list", "asset-list"])
 def test_list_views_require_login(client, viewname):
@@ -48,6 +50,9 @@ def test_other_user_does_not_see_records(
         response = client.get(url)
     assert response.status_code == 200
     assert len(response.context["object_list"]) == 0
+
+
+# Detail views
 
 
 def test_detail_views_require_login(
@@ -165,6 +170,48 @@ def test_authorized_user_get_asset_views(
     asset = user_created_assets[0]
     client.force_login(asset.owner)
     url = reverse(f"audio_asset_manager:{view_name}", kwargs={"pk": asset.id})
+    with django_assert_max_num_queries(50):
+        response = client.get(url)
+    assert response.status_code == 200
+
+
+@pytest.mark.parametrize(
+    "view_name", ["artist-detail", "artist-update", "artist-delete"]
+)
+def test_authorized_user_get_artist_views(
+    client, django_assert_max_num_queries, user_created_assets, view_name
+):
+    artist = user_created_assets[0].artist
+    client.force_login(artist.owner)
+    url = reverse(f"audio_asset_manager:{view_name}", kwargs={"pk": artist.id})
+    with django_assert_max_num_queries(50):
+        response = client.get(url)
+    assert response.status_code == 200
+
+
+@pytest.mark.parametrize(
+    "view_name", ["source-detail", "source-update", "source-delete"]
+)
+def test_authorized_user_get_source_views(
+    client, django_assert_max_num_queries, user_created_assets, view_name
+):
+    source = user_created_assets[0].source
+    client.force_login(source.owner)
+    url = reverse(f"audio_asset_manager:{view_name}", kwargs={"pk": source.id})
+    with django_assert_max_num_queries(50):
+        response = client.get(url)
+    assert response.status_code == 200
+
+
+@pytest.mark.parametrize(
+    "view_name", ["collection-detail", "collection-update", "collection-delete"]
+)
+def test_authorized_user_get_collection_views(
+    client, django_assert_max_num_queries, user_created_assets, view_name
+):
+    collection = user_created_assets[0].collection
+    client.force_login(collection.owner)
+    url = reverse(f"audio_asset_manager:{view_name}", kwargs={"pk": collection.id})
     with django_assert_max_num_queries(50):
         response = client.get(url)
     assert response.status_code == 200

@@ -65,6 +65,7 @@ class AssetSourceUpdateView(
 
     model = AssetSource
     context_object_name = "source"
+    fields = ["name", "url", "license_type", "source_credit_text"]
 
     def get_success_url(self):
         return reverse_lazy(
